@@ -5,6 +5,7 @@ import requests
 api_id = int(os.environ.get("API_ID"))
 api_hash = os.environ.get("API_HASH")
 webhook_url = os.environ.get("N8N_WEBHOOK")
+phone = os.environ.get("PHONE")
 
 client = TelegramClient("anon", api_id, api_hash)
 
@@ -22,5 +23,5 @@ async def handler(event):
         print(f"Erro ao enviar para n8n: {e}")
 
 print("Userbot iniciado! Aguardando mensagens...")
-client.start()
+client.start(phone=phone)
 client.run_until_disconnected()
