@@ -1,6 +1,7 @@
 from telethon import TelegramClient, events
 import os
 import requests
+import asyncio
 
 api_id = int(os.environ.get("API_ID"))
 api_hash = os.environ.get("API_HASH")
@@ -22,6 +23,9 @@ async def handler(event):
     except Exception as e:
         print(f"Erro ao enviar para n8n: {e}")
 
-print("Userbot iniciado! Aguardando mensagens...")
-client.start(phone=phone)
-client.run_until_disconnected()
+async def main():
+    await client.start(phone=phone)
+    print("Userbot iniciado! Aguardando mensagens...")
+    await client.run_until_disconnected()
+
+asyncio.run(main())
