@@ -2,8 +2,15 @@ version: '3.8'
 
 services:
   telegram-userbot:
-    build: .
-    container_name: telegram-userbot
+    image: python:3.11-slim
+    working_dir: /app
     volumes:
-      - ./data:/app  # armazena a sessão da conta Telegram
+      - ./data:/app
+    command: >
+      sh -c "
+        pip install --no-cache-dir -r requirements.txt &&
+        python bot.py
+      "
     restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
