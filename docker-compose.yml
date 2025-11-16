@@ -1,10 +1,16 @@
 version: '3.8'
+
 services:
-  telegram-n8n-bot:
-    build: .
-    container_name: telegram-n8n-bot
+  telegram-userbot:
+    image: python:3.11-slim
+    working_dir: /app
     volumes:
-      - telegram-session:/app
+      - ./data:/app
+    command: >
+      sh -c "
+        pip install --no-cache-dir -r requirements.txt &&
+        python bot.py
+      "
     restart: unless-stopped
-volumes:
-  telegram-session:
+    environment:
+      - PYTHONUNBUFFERED=1
