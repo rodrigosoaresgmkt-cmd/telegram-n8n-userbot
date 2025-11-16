@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  telegram-n8n-bot:
+    build: .
+    container_name: telegram-n8n-bot
+    volumes:
+      - telegram-session:/app
+    restart: unless-stopped
+volumes:
+  telegram-session:
